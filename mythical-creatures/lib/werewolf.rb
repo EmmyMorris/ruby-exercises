@@ -5,6 +5,7 @@ class Werewolf
     @location = location
     @human = true
     @wolf = false
+    @hungry = false
   end
 
   def human?
@@ -18,9 +19,17 @@ class Werewolf
   def change!
     @human = !@human
     @wolf = !@wolf
+    @hungry = true
   end
 
   def consume!(victim)
-    victim.status = :dead
+    if @wolf == true
+      victim.status = :dead
+      @hungry = false
+    end
+  end
+
+  def hungry?
+    @hungry
   end
 end
