@@ -3,7 +3,7 @@ require './lib/werewolf'
 
 RSpec.describe Werewolf do
   it 'has a name' do
-    werewolf = Werewolf.new('David')
+    werewolf = Werewolf.new('David', 'London')
     expect(werewolf.name).to eq('David')
   end
 
@@ -14,7 +14,7 @@ RSpec.describe Werewolf do
 
   it 'is by default human' do
     werewolf = Werewolf.new('David', 'London')
-    expect(werewolf.human?).to be false
+    expect(werewolf.human?).to be true
   end
 
   it 'when starting as a human, changing makes it turn into a werewolf' do
@@ -66,7 +66,11 @@ RSpec.describe Werewolf do
   end
 
   it 'consumes a victim' do
-    # your code here
+    werewolf = Werewolf.new('David', 'London')
+    victim = Victim.new
+    expect(victim.status).to be :alive
+    werewolf.consume!(victim)
+    expect(victim.status).to be :dead
   end
 
   it 'cannot consume a victim if it is in human form' do
